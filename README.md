@@ -61,8 +61,8 @@ java -cp bin Main
 7. Ver pasajeros de un vuelo
 8. Cambiar estado de vuelo
 9. Ver estadísticas
-10. Consultar rutas disponibles (reto adicional 1)
-11. Ver ocupación por vuelo (reto adicional 2)
+10. Consultar rutas disponibles 
+11. Ver ocupación por vuelo
 12. Salir
 
 El programa carga automáticamente los datos iniciales de ejemplo (aeropuertos,
