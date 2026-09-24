@@ -1,8 +1,5 @@
 # Sistema de Gestión de Vuelos y Aeropuertos
 
-Proyecto Java de consola que cumple con el 100% de los requisitos del taller,
-incluyendo los dos retos adicionales.
-
 ## Estructura
 
 ```
