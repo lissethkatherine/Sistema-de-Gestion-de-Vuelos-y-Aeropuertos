@@ -1,66 +1,73 @@
-# Sistema de Gestión de Vuelos y Aeropuertos
+# ✈️ Sistema de Gestión de Vuelos y Aeropuertos
 
-## Estructura
+> Aplicación desarrollada en Java para la administración integral de aeropuertos, vuelos, pasajeros, pilotos y la lógica de control asociada.
 
+---
+
+## 📂 Estructura del Proyecto
+
+El proyecto está organizado bajo una arquitectura modular limpia orientada a objetos, separando las entidades, la lógica de negocio, el almacenamiento y las excepciones personalizadas:
+
+```text
+Main/
+├── pom.xml
+└── src
+    └── main
+        └── java
+            └── com
+                └── mycompany
+                    └── main
+                        ├── Main.java
+                        ├── exceptions
+                        │   └── VueloLlenoException.java
+                        ├── models
+                        │   ├── Aeropuerto.java
+                        │   ├── EstadoVuelo.java
+                        │   ├── Pasajero.java
+                        │   ├── Persona.java
+                        │   ├── Piloto.java
+                        │   └── Vuelo.java
+                        ├── repositories
+                        │   └── Repositorio.java
+                        └── services
+                            └── SistemaVuelos.java
 ```
-src/
-├── Main.java
-├── models/
-│   ├── Persona.java        (clase abstracta)
-│   ├── Pasajero.java       (extends Persona)
-│   ├── Piloto.java         (extends Persona)
-│   ├── Aeropuerto.java
-│   ├── Vuelo.java
-│   └── EstadoVuelo.java    (enum)
-├── services/
-│   └── SistemaVuelos.java  (toda la lógica de negocio)
-├── repositories/
-│   └── Repositorio.java    (clase genérica <T>)
-└── exceptions/
-    └── VueloLlenoException.java
-```
 
-## Cómo compilar y ejecutar
+---
 
-Desde la carpeta raíz del proyecto (donde está la carpeta `src`):
+## 🧱 Componentes Principales
 
-```bash
-# Compilar
-javac -d bin src/Main.java src/models/*.java src/services/*.java src/repositories/*.java src/exceptions/*.java
+### 1. Modelos (`models/`)
+* **`Persona`**: Clase base que define los atributos generales (identificación, nombre, etc.) para las personas involucradas en el sistema.
+* **`Pasajero`**: Extiende de `Persona` y gestiona los datos específicos de los viajeros y sus reservas de vuelos.
+* **`Piloto`**: Extiende de `Persona` e incluye la información y credenciales de los comandantes de vuelo.
+* **`Aeropuerto`**: Modela las instalaciones aeroportuarias, sus ubicaciones y la gestión de operaciones de salida/llegada.
+* **`Vuelo`**: Administra la información del trayecto, origen, destino, capacidad máxima, asignación de pilotos y pasajeros a bordo.
+* **`EstadoVuelo`**: `Enum` que representa los posibles estados operativos de un vuelo (ej. *Programado*, *En Vuelo*, *Cancelado*, *Aterrizado*).
 
-# Ejecutar
-java -cp bin Main
-```
+### 2. Lógica y Excepciones (`exceptions/` y `services/`)
+* **`VueloLlenoException`**: Excepción personalizada lanzada cuando se intenta registrar un pasajero en un vuelo que ha alcanzado su capacidad máxima de asientos.
+* **`SistemaVuelos`**: Capa de servicios que concentra las reglas de negocio principales (creación de vuelos, asignación de pilotos, reservas de pasajeros y control de estados).
 
-## Conceptos aplicados (todos presentes en el código, con comentarios)
+### 3. Repositorios (`repositories/`)
+* **`Repositorio`**: Gestiona el almacenamiento temporal o en memoria de las entidades del sistema (vuelos, pasajeros, aeropuertos y pilotos).
 
-- Variables, tipos de datos, operadores, condicionales, switch, ciclos → `Main.java`, `SistemaVuelos.java`
-- Cadenas y conversiones (`toLowerCase`, `contains`, `trim`) → `buscarPorDestino`, `consultarRutas`
-- Clases y objetos, encapsulamiento (atributos `private` + getters/setters) → todas las clases de `models/`
-- Herencia → `Persona` → `Pasajero`, `Piloto`
-- Clase abstracta y polimorfismo → `Persona.obtenerDescripcion()`, recorrido de `List<Persona>` en `verEstadisticas()`
-- Listas → `List<Vuelo>`, `List<Pasajero>`, `List<Persona>`
-- Genéricos → `Repositorio<T>`
-- Relaciones entre clases → `Vuelo` contiene `Aeropuerto` (origen/destino) y `List<Pasajero>`
-- Set → `obtenerCiudadesDestino()`
-- Map → `obtenerVuelosPorDestino()`
-- Enumeraciones → `EstadoVuelo`
-- Excepciones y excepción personalizada → `VueloLlenoException`, manejada con `try/catch` en `Main.reservarVuelo`
+---
 
-## Menú
+## ⚙️ Requisitos del Sistema
 
-1. Registrar aeropuerto
-2. Registrar pasajero
-3. Registrar vuelo
-4. Listar vuelos
-5. Buscar vuelos por destino
-6. Reservar vuelo
-7. Ver pasajeros de un vuelo
-8. Cambiar estado de vuelo
-9. Ver estadísticas
-10. Consultar rutas disponibles 
-11. Ver ocupación por vuelo
-12. Salir
+* **Java JDK**: Versión 11 o superior recomendada.
+* **Apache Maven**: Para la gestión de dependencias y la compilación del proyecto.
 
-El programa carga automáticamente los datos iniciales de ejemplo (aeropuertos,
-vuelos, pasajeros y pilotos).
+---
+
+## 🚀 Instalación y Ejecución
+
+1. **Clonar o descargar** el repositorio en tu máquina local.
+2. **Abrir una terminal** en la carpeta raíz del proyecto (`Main/`).
+3. **Compilar el proyecto** usando Maven:
+   ```bash
+   mvn clean compile
+   ```
+4. **Ejecutar la aplicación**:
+   Puedes ejecutar la clase principal `Main.java` desde tu entorno de desarrollo favorito (IntelliJ IDEA, Eclipse, NetBeans) o mediante la terminal utilizando Maven (si está configurado con un plugin de ejecución) o ejecutando el archivo `.class` compilado.
